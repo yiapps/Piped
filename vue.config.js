@@ -1,3 +1,5 @@
+const ClosurePlugin = require('closure-webpack-plugin');
+
 module.exports = {
     pwa: {
         name: 'Piped',
@@ -14,6 +16,21 @@ module.exports = {
                 urlPattern: /\.(?:png|svg|ico)$/,
                 handler: 'CacheFirst',
             }],
+        }
+    },
+    configureWebpack: {
+        optimization: {
+            minimizer: [
+                new ClosurePlugin({ mode: 'AGGRESSIVE_BUNDLE' }, {
+                    // compiler flags here
+                    //
+                    // for debugging help, try these:
+                    //
+                    // formatting: 'PRETTY_PRINT'
+                    // debug: true,
+                    // renaming: false
+                })
+            ]
         }
     }
 }
