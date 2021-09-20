@@ -12,7 +12,7 @@
                     height="32"
                     width="32"
                     style="margin-bottom: 6px; margin-right: -13px"
-                />iped</router-link
+                /></router-link
             >
         </div>
         <div class="uk-navbar-center uk-flex uk-visible@m">
