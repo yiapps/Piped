@@ -13,7 +13,7 @@
 
         <div style="text-align: center">
             <a aria-label="GitHub" href="https://github.com/TeamPiped/Piped">
-            Made with &nbsp;
+            Made with 
                 <font-awesome-icon :icon="['fab', 'github']"></font-awesome-icon>
             </a>
             &nbsp; - &nbsp;
