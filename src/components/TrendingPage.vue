@@ -33,7 +33,7 @@ export default {
         });
     },
     activated() {
-        document.title = this.$t("titles.trending") + " - QuicTube";
+        document.title = this.$t("titles.trending") + " - QuicTub";
         if (this.videos.length > 0) this.updateWatched(this.videos);
     },
     methods: {
