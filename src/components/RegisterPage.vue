@@ -46,7 +46,7 @@ export default {
         }
     },
     activated() {
-        document.title = "Register - Piped";
+        document.title = "Register - QuicTube";
     },
     methods: {
         register() {
