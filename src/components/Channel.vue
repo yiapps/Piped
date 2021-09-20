@@ -82,7 +82,7 @@ export default {
                 .then(data => (this.channel = data))
                 .then(() => {
                     if (!this.channel.error) {
-                        document.title = this.channel.name + " - Piped";
+                        document.title = this.channel.name + " - QuicTube";
                         if (this.authenticated) this.fetchSubscribedStatus();
                         this.updateWatched(this.channel.relatedStreams);
                     }
