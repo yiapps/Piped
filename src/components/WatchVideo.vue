@@ -170,7 +170,7 @@ export default {
         this.selectedAutoPlay = this.getPreferenceBoolean("autoplay", true);
         this.showDesc = !this.getPreferenceBoolean("minimizeDescription", false);
         if (this.video.duration) {
-            document.title = this.video.title + " - Piped";
+            document.title = this.video.title + " - QuicTube";
             this.$refs.videoPlayer.loadVideo();
         }
         window.addEventListener("scroll", this.handleScroll);
@@ -210,7 +210,7 @@ export default {
                 })
                 .then(() => {
                     if (!this.video.error) {
-                        document.title = this.video.title + " - Piped";
+                        document.title = this.video.title + " - QuicTube";
                         this.channelId = this.video.uploaderUrl.split("/")[2];
                         if (!this.isEmbed) this.fetchSubscribedStatus();
 
