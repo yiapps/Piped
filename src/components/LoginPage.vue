@@ -46,7 +46,7 @@ export default {
         }
     },
     activated() {
-        document.title = this.$t("titles.login") + " - Piped";
+        document.title = this.$t("titles.login") + " - QuicTube";
     },
     methods: {
         login() {
