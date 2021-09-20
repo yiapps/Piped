@@ -269,7 +269,7 @@ export default {
         };
     },
     activated() {
-        document.title = this.$t("titles.preferences") + " - Piped";
+        document.title = this.$t("titles.preferences") + " - QuicTube";
     },
     mounted() {
         if (Object.keys(this.$route.query).length > 0) this.$router.replace({ query: {} });
