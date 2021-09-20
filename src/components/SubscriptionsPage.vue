@@ -68,7 +68,7 @@ export default {
         else this.$router.push("/login");
     },
     activated() {
-        document.title = "Subscriptions - Piped";
+        document.title = "Subscriptions - QuicTube";
     },
     methods: {
         handleButton(subscription) {
