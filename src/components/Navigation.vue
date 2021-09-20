@@ -9,8 +9,8 @@
                 ><img
                     alt="logo"
                     src="/img/icons/logo.svg"
-                    height="50"
-                    width="50"
+                    height="64"
+                    width="64"
                     style="margin-bottom: 6px; margin-right: -13px"
                 /></router-link
             >
