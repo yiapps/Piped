@@ -75,7 +75,7 @@ export default {
     },
     activated() {
         if (!this.authenticated) this.$router.push("/login");
-        document.title = "Import - Piped";
+        document.title = "Import - QuicTube";
     },
     methods: {
         fileChange() {
