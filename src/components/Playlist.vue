@@ -65,7 +65,7 @@ export default {
         async getPlaylistData() {
             this.fetchPlaylist()
                 .then(data => (this.playlist = data))
-                .then(() => (document.title = this.playlist.name + " - Piped"));
+                .then(() => (document.title = this.playlist.name + " - QuicTube"));
         },
         handleScroll() {
             if (this.loading || !this.playlist || !this.playlist.nextpage) return;
