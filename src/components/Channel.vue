@@ -47,7 +47,7 @@ export default {
         this.getChannelData();
     },
     activated() {
-        if (this.channel && !this.channel.error) document.title = this.channel.name + " - Piped";
+        if (this.channel && !this.channel.error) document.title = this.channel.name + " - QuicTube";
         window.addEventListener("scroll", this.handleScroll);
         if (this.channel && !this.channel.error) this.updateWatched(this.channel.relatedStreams);
     },
