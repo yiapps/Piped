@@ -1,6 +1,6 @@
 module.exports = {
     pwa: {
-        name: 'Piped',
+        name: 'QuicTube',
         themeColor: '#fa4b4b',
         msTileColor: '#000000',
         appleMobileWebAppCapable: 'yes',
