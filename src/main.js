@@ -140,7 +140,7 @@ const mixin = {
             } else return defaultVal;
         },
         apiUrl() {
-            return this.getPreferenceString("instance", "https://pipedapi.quictube.com");
+            return this.getPreferenceString("instance", "https://pipedapi.kavin.rocks");
         },
         getEffectiveTheme() {
             var theme = this.getPreferenceString("theme", "dark");
