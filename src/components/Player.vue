@@ -29,6 +29,11 @@
     background-color: rgba(8, 8, 8, 0.75) !important;
     color: white !important;
 }
+
+.shaka-video-container:-webkit-full-screen {
+    max-height: none !important;
+}
+
 </style>
 
 <script>
@@ -192,6 +197,10 @@ export default {
                     this.setPreference("volume", videoEl.volume);
                 });
 
+                videoEl.addEventListener("ratechange", () => {
+                    this.setPreference("rate", videoEl.playbackRate);
+                })
+
                 videoEl.addEventListener("ended", () => {
                     if (!this.selectedAutoLoop && this.selectedAutoPlay && this.video.relatedStreams.length > 0) {
                         const params = this.$route.query;
@@ -278,6 +287,7 @@ export default {
                     );
                 });
                 videoEl.volume = this.getPreferenceNumber("volume", 1);
+                videoEl.playbackRate = this.getPreferenceNumber("rate", 1);
             });
         },
         destroy() {
@@ -304,8 +314,7 @@ export default {
                     const videoEl = self.$refs.videoEl;
                     switch (handler.key) {
                         case "f":
-                            if (document.fullscreenElement) document.exitFullscreen();
-                            else document.querySelector("video[data-shaka-player]").requestFullscreen();
+                            self.ui.getControls().toggleFullScreen();
                             e.preventDefault();
                             break;
                         case "m":

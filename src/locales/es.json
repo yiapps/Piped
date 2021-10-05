@@ -61,7 +61,13 @@
         "sort_by": "Ordenar por:",
         "view_subscriptions": "Ver suscripciones",
         "unsubscribe": "Anular suscripción",
-        "subscribe": "Suscribirme"
+        "subscribe": "Suscribirme",
+        "loading": "Cargando…",
+        "filter": "Filtrar",
+        "search": "Buscar",
+        "view_ssl_score": "Ver la puntuación SSL",
+        "minimize_recommendations": "Minimizar recomendaciones",
+        "show_recommendations": "Mostrar recomendaciones"
     },
     "titles": {
         "feed": "Feed",
@@ -74,5 +80,9 @@
     },
     "player": {
         "watch_on": "Ver en"
+    },
+    "login": {
+        "password": "Contraseña",
+        "username": "Nombre de usuario"
     }
 }

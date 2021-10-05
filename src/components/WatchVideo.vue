@@ -56,7 +56,7 @@
             </div>
 
             <div class="uk-flex uk-flex-middle uk-margin-small-top">
-                <img :src="video.uploaderAvatar" loading="lazy" class="uk-border-circle" />
+                <img :src="video.uploaderAvatar" alt="" loading="lazy" class="uk-border-circle" />
                 <router-link class="uk-link uk-margin-small-left" v-if="video.uploaderUrl" :to="video.uploaderUrl">
                     {{ video.uploader }} </router-link
                 >&thinsp;<font-awesome-icon v-if="video.uploaderVerified" icon="check"></font-awesome-icon>
@@ -85,11 +85,27 @@
 
         <hr />
 
-        <label for="chkAutoLoop"><b>{{ $t("actions.loop_this_video") }}:</b></label>&nbsp;
-        <input id="chkAutoLoop" class="uk-checkbox" v-model="selectedAutoLoop" @change="onChange($event)" type="checkbox" />
+        <label for="chkAutoLoop"
+            ><b>{{ $t("actions.loop_this_video") }}:</b></label
+        >&nbsp;
+        <input
+            id="chkAutoLoop"
+            class="uk-checkbox"
+            v-model="selectedAutoLoop"
+            @change="onChange($event)"
+            type="checkbox"
+        />
         <br />
-        <label for="chkAutoPlay"><b>{{ $t("actions.auto_play_next_video") }}:</b></label>&nbsp;
-        <input id="chkAutoPlay" class="uk-checkbox" v-model="selectedAutoPlay" @change="onChange($event)" type="checkbox" />
+        <label for="chkAutoPlay"
+            ><b>{{ $t("actions.auto_play_next_video") }}:</b></label
+        >&nbsp;
+        <input
+            id="chkAutoPlay"
+            class="uk-checkbox"
+            v-model="selectedAutoPlay"
+            @change="onChange($event)"
+            type="checkbox"
+        />
 
         <hr />
 
@@ -106,7 +122,11 @@
             </div>
 
             <div class="uk-width-1-5@xl uk-width-1-4@s uk-width-1 uk-flex-last@s uk-flex-first" v-if="video">
+                <a class="uk-button uk-button-small uk-margin-small-bottom uk-hidden@s" style="background: #222" @click="showRecs = !showRecs">
+                    {{ showRecs ? $t("actions.minimize_recommendations") : $t("actions.show_recommendations") }}
+                </a>
                 <div
+                    v-show="showRecs || !smallView"
                     class="uk-tile-default uk-width-auto"
                     :style="[{ background: backgroundColor }]"
                     v-bind:key="related.url"
@@ -114,6 +134,7 @@
                 >
                     <VideoItem :video="related" height="94" width="168" />
                 </div>
+                <hr class="uk-hidden@s"/>
             </div>
         </div>
     </div>
@@ -128,6 +149,7 @@ import Comment from "@/components/Comment.vue";
 export default {
     name: "App",
     data() {
+        const smallViewQuery = window.matchMedia("(max-width: 640px)");
         return {
             video: {
                 title: "Loading...",
@@ -136,10 +158,13 @@ export default {
             selectedAutoLoop: false,
             selectedAutoPlay: null,
             showDesc: true,
+            showRecs: true,
             comments: null,
             subscribed: false,
             channelId: null,
             active: true,
+            smallViewQuery: smallViewQuery,
+            smallView: smallViewQuery.matches,
         };
     },
     mounted() {
@@ -164,10 +189,13 @@ export default {
         });
         this.getSponsors();
         if (!this.isEmbed && this.getPreferenceBoolean("comments", true)) this.getComments();
+        window.addEventListener("resize", () => {
+            this.smallView = this.smallViewQuery.matches;
+        });
     },
     activated() {
         this.active = true;
-        this.selectedAutoPlay = this.getPreferenceBoolean("autoplay", true);
+        this.selectedAutoPlay = this.getPreferenceBoolean("autoplay", false);
         this.showDesc = !this.getPreferenceBoolean("minimizeDescription", false);
         if (this.video.duration) {
             document.title = this.video.title + " - QuicTube";

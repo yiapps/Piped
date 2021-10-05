@@ -42,11 +42,17 @@
         "loop_this_video": "Sukti ratu šį vaizdo įrašą",
         "show_description": "Rodyti aprašymą",
         "minimize_description": "Suskleisti aprašymą",
+        "minimize_recommendations": "Suskleisti rekomendacijas",
+        "show_recommendations": "Rodyti rekomendacijas",
         "import_from_json": "Importuoti iš JSON",
         "export_to_json": "Eksportuoti į JSON",
         "no": "Ne",
         "yes": "Taip",
-        "show_more": "Rodyti daugiau"
+        "show_more": "Rodyti daugiau",
+        "loading": "Įkeliama…",
+        "filter": "Filtruoti",
+        "search": "Ieškoti",
+        "view_ssl_score": "Peržiūrėti SSL balą"
     },
     "player": {
         "watch_on": "Žiūrėti per"
@@ -74,5 +80,9 @@
         "videos": "Vaizdo įrašai",
         "sponsor_segments": "Rėmėjų segmentai",
         "watched": "Žiūrėta"
+    },
+    "login": {
+        "password": "Slaptažodis",
+        "username": "Vartotojo vardas"
     }
 }

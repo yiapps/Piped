@@ -194,7 +194,7 @@
                 <td>{{ instance.locations }}</td>
                 <td>{{ instance.cdn == "Yes" ? $t("actions.yes") : $t("actions.no") }}</td>
                 <td>
-                    <a :href="sslScore(instance.apiurl)" target="_blank">Click Here</a>
+                    <a :href="sslScore(instance.apiurl)" target="_blank"> {{ $t("actions.view_ssl_score") }}</a>
                 </td>
             </tr>
         </tbody>
@@ -219,7 +219,7 @@
 </template>
 
 <script>
-import CountryMap from "@/utils/CountryMap.js";
+import CountryMap from "@/utils/CountryMaps/en.json";
 export default {
     data() {
         return {
@@ -239,7 +239,7 @@ export default {
             resolutions: [144, 240, 360, 480, 720, 1080, 1440, 2160, 4320],
             defaultQuality: 0,
             bufferingGoal: 10,
-            countryMap: CountryMap.COUNTRIES,
+            countryMap: CountryMap,
             country: "US",
             defaultHomepage: "trending",
             showComments: true,
@@ -253,6 +253,7 @@ export default {
                 { code: "es", name: "Español" },
                 { code: "en", name: "English" },
                 { code: "fa", name: "فارسی" },
+                { code: "fi", name: "Suomi" },
                 { code: "fr", name: "français" },
                 { code: "hr", name: "Hrvatski" },
                 { code: "it", name: "italiano" },
@@ -262,6 +263,7 @@ export default {
                 { code: "pl", name: "polski" },
                 { code: "tr", name: "Türkçe" },
                 { code: "zh_Hant", name: "繁體中文" },
+                { code: "zh_Hans", name: "简体中文" },
             ],
             enabledCodecs: ["av1", "vp9", "avc"],
             disableLBRY: false,
@@ -271,7 +273,7 @@ export default {
     activated() {
         document.title = this.$t("titles.preferences") + " - QuicTube";
     },
-    mounted() {
+    async mounted() {
         if (Object.keys(this.$route.query).length > 0) this.$router.replace({ query: {} });
 
         fetch("https://raw.githubusercontent.com/wiki/TeamPiped/Piped-Frontend/Instances.md")
@@ -350,10 +352,21 @@ export default {
             this.showComments = this.getPreferenceBoolean("comments", true);
             this.minimizeDescription = this.getPreferenceBoolean("minimizeDescription", false);
             this.watchHistory = this.getPreferenceBoolean("watchHistory", false);
-            this.selectedLanguage = this.getPreferenceString("hl", "en");
+            this.selectedLanguage = this.getPreferenceString("hl", this.defaultLangage);
             this.enabledCodecs = this.getPreferenceString("enabledCodecs", "av1,vp9,avc").split(",");
             this.disableLBRY = this.getPreferenceBoolean("disableLBRY", false);
             this.proxyLBRY = this.getPreferenceBoolean("proxyLBRY", false);
+            if (this.selectedLanguage != "en") {
+                try {
+                    this.CountryMap = await import("@/utils/CountryMaps/" + this.selectedLanguage + ".json").then(
+                        val => {
+                            this.countryMap = val;
+                        },
+                    );
+                } catch (e) {
+                    console.error("Countries not translated into " + this.selectedLanguage);
+                }
+            }
         }
     },
     methods: {
@@ -364,7 +377,7 @@ export default {
                 if (
                     this.getPreferenceString("theme", "dark") !== this.selectedTheme ||
                     this.getPreferenceBoolean("watchHistory", false) != this.watchHistory ||
-                    this.getPreferenceString("hl", "en") !== this.selectedLanguage ||
+                    this.getPreferenceString("hl", this.defaultLangage) !== this.selectedLanguage ||
                     this.getPreferenceString("enabledCodecs", "av1,vp9,avc") !== this.enabledCodecs.join(",")
                 )
                     shouldReload = true;
